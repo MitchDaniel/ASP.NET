@@ -1,6 +1,0 @@
-@Practice_and_homework_1_HostAddress = http://localhost:5128
-
-GET {{Practice_and_homework_1_HostAddress}}/
-Accept: application/json
-
-###
