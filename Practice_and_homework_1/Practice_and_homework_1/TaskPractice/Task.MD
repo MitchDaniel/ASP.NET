@@ -24,7 +24,6 @@ app.MapGet("/hello/{name}", (string name) => $"Hello, {name}!");
 
 Измените имя в адресе и проверьте, что ответ меняется.
 
-
 Задание 4
 В том же файле Program.cs добавьте строку:
 app.MapGet("/api/info", () => new { message = "My first ASP.NET Core app is running!", time = DateTime.Now });
@@ -34,3 +33,4 @@ app.MapGet("/api/info", () => new { message = "My first ASP.NET Core app is runn
 В браузере откройте адрес https://localhost:7XXX/api/info.
 
 Убедитесь, что в ответе отображается JSON с полями message и time.
+
