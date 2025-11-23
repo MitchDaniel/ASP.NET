@@ -1,0 +1,9 @@
+@Practice_and_homework2_HostAddress = http://localhost:5022
+
+### GET ALL ITEMS
+GET {{Practice_and_homework2_HostAddress}}/api/items
+Accept: application/json
+
+### GET ITEM BY ID
+GET {{Practice_and_homework2_HostAddress}}/api/Items/1
+Accept: application/json
