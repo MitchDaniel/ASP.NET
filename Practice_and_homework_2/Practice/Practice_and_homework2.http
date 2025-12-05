@@ -4,38 +4,56 @@
 GET {{Practice_and_homework2_HostAddress}}/api/items
 Accept: application/json
 
-### GET ITEM BY ID
-GET {{Practice_and_homework2_HostAddress}}/api/items/1
+### GET ITEM BY ID 
+GET {{Practice_and_homework2_HostAddress}}/api/items/3
 Accept: application/json
 
-### SEACH BY NAME "MercedesPetronas"
-GET {{Practice_and_homework2_HostAddress}}/api/Items/search?name=MercedesPetronas
+### GET ITEM BY NON-EXISTENT ID
+GET {{Practice_and_homework2_HostAddress}}/api/items/999
 Accept: application/json
 
-### SEACH BY NAME "AstonMartin"
-GET {{Practice_and_homework2_HostAddress}}/api/Items/search?name=AstonMartin
+### SEARCH ITEMS BY NAME
+GET {{Practice_and_homework2_HostAddress}}/api/items/search?name=Mercedes
 Accept: application/json
 
-### SEACH BY NAME WITHOUT QUERY PARAMETRS
-GET {{Practice_and_homework2_HostAddress}}/api/Items/search
+### SEARCH ITEMS BY NAME 
+GET {{Practice_and_homework2_HostAddress}}/api/items/search?name=AstonMartin
+Accept: application/json
+
+### SEARCH ITEMS WITHOUT NAME PARAMETER
+GET {{Practice_and_homework2_HostAddress}}/api/items/search
 Accept: application/json
 
 ### CREATE NEW ITEM
-POST {{Practice_and_homework2_HostAddress}}/api/items?name=AstonMartin
-Content-Type: application/json
-
-### CREATE NEW ITEM WITHOUT NAME
 POST {{Practice_and_homework2_HostAddress}}/api/items
 Content-Type: application/json
+Accept: application/json
 
-### UPDATE ITEM ID 2 TO "OracaleRedBullRacing"
-PUT {{Practice_and_homework2_HostAddress}}/api/items/2?name=OracaleRedBullRacing
+{
+  "name": "Aston Martin"
+}
+
+### CREATE ITEM WITHOUT NAME
+POST {{Practice_and_homework2_HostAddress}}/api/items
 Content-Type: application/json
+Accept: application/json
+
+{
+}
+
+### UPDATE ITEM ID 2 TO “Oracle Red Bull Racing”
+PUT {{Practice_and_homework2_HostAddress}}/api/items/2
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Oracle Red Bull Racing"
+}
 
 ### DELETE ITEM BY ID 3
 DELETE {{Practice_and_homework2_HostAddress}}/api/items/3
 Accept: application/json
 
-### DELETE ITEM BY ID 10 (NOT EXIST)
+### DELETE NON-EXISTENT ITEM BY ID 10
 DELETE {{Practice_and_homework2_HostAddress}}/api/items/10
 Accept: application/json

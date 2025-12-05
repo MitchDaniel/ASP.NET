@@ -9,9 +9,9 @@ public class ItemsController : ControllerBase
 {
     private static List<Item> _items =
     [
-        new(1, "MercedesPetronas"),
-        new(2, "ScuderiaFerrari"),
-        new(3, "RedBullRacing")
+        new() {Id = 1, Name = "Mercedes Petronas"},
+        new() {Id = 2, Name = "Scuderia Ferrari"},
+        new() {Id = 3, Name = "Red Bull Racing"}
     ];
     
     [HttpGet("")]
@@ -23,62 +23,62 @@ public class ItemsController : ControllerBase
     [HttpGet("{id:int}")]
     public IActionResult GetItem(int id)
     {
-        if(id > _items.Count || id < 1)
+        var item = _items.FirstOrDefault(i => i.Id == id);
+        if (item is null)
             return NotFound("Item not found");
-        return Ok(_items[id - 1]);
+
+        return Ok(item);
     }
 
     [HttpGet("search")]
-    public IActionResult SearchItems([FromQuery] string? name)
+    public IActionResult SearchItems([FromQuery] string name)
     {
-        if (name is null)
+        if (string.IsNullOrEmpty(name))
             return BadRequest("Name is empty");
 
-        return Ok(_items
-                    .Where(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
-                    .ToList());
+        var items = _items
+            .Where(item => item.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase));
+        
+        return Ok(items);
     }
 
     [HttpPost("")]
-    public IActionResult CreateItem([FromQuery] string name)
+    public IActionResult CreateItem([FromBody] Item item)
     {
-        if(string.IsNullOrEmpty(name))
+        if(string.IsNullOrEmpty(item.Name))
             return BadRequest("Name is empty");
+
+
+        item.Id = _items.Count + 1;
+
+        _items.Add(item);
         
-        var newItem = new Item(_items.Count + 1, name);
-        _items.Add(newItem);
-        return CreatedAtAction(nameof(GetItem), new { id = newItem.Id }, newItem);
+        return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item);
     }
     
     [HttpPut("{id:int}")]
-    public IActionResult UpdateItem(int id, [FromQuery] string name)
+    public IActionResult UpdateItem(int id, [FromBody] Item item)
     {
-        if(id > _items.Count || id < 1)
-            return NotFound("Item not found");
-        
-        if(string.IsNullOrEmpty(name))
+        if(string.IsNullOrWhiteSpace(item.Name))
             return BadRequest("Name is empty");
         
-        var updatedItem = new Item(id, name);
-        _items[id - 1] = updatedItem;
+        var updatedItem = _items.FirstOrDefault(i => i.Id == id);
+        if(updatedItem is null)
+            return NotFound("Item not found");
+
+        updatedItem.Name = item.Name;
         return Ok(updatedItem);
     }
 
     [HttpDelete("{id:int}")]
     public IActionResult DeleteItem(int id)
     {
-        if(id > _items.Count || id < 1)
+        var item = _items.FirstOrDefault(item => item.Id == id);
+        if(item is null)
             return NotFound("Item not found");
         
-        _items.RemoveAt(id - 1);
-        
-        for(int i = id - 1; i < _items.Count; i++)
-        {
-            var tempItem = _items[i];
-            _items[i] = new Item(tempItem.Id - 1, tempItem.Name);
-        }
+        _items.Remove(item);
         
         return NoContent();
     }
-    
 }
