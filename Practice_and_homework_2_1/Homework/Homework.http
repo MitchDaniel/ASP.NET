@@ -1,6 +1,112 @@
-@Homework_HostAddress = http://localhost:5295
+@Homework_HostAddress = http://localhost:5234
 
-GET {{Homework_HostAddress}}/weatherforecast/
+### GET ALL
+
+GET {{Homework_HostAddress}}/api/books
 Accept: application/json
 
-###
+
+### GET BY ID
+
+GET {{Homework_HostAddress}}/api/books/1
+Accept: application/json
+
+
+### GET BY NON-EXISTENT ID
+
+GET {{Homework_HostAddress}}/api/books/7
+Accept: application/json
+
+
+### SEARCH BY TITLE
+
+GET {{Homework_HostAddress}}/api/books/search?title=Papillon
+Accept: application/json
+
+
+### SEARCH BY NON-EXISTENT TITLE
+
+GET {{Homework_HostAddress}}/api/books/search?title=Walter
+Accept: application/json
+
+
+### SEARCH BY TITLE AND AUTHOR
+
+GET {{Homework_HostAddress}}/api/books/search?author=WalterIsaacson&title=SteveJobs
+Accept: application/json
+
+
+### SEARCH BY NON-EXISTENT TITLE
+
+GET {{Homework_HostAddress}}/api/books/search?title=WalterIsaacson
+Accept: application/json
+
+
+### ADD BOOK
+
+POST {{Homework_HostAddress}}/api/books
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "DesignPatterns",
+  "author": "GOF",
+  "year": 1998
+}
+
+
+### ADD BOOK WITH EMPTY TITLE
+
+POST {{Homework_HostAddress}}/api/books
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "",
+  "author": "GOF",
+  "year": 1998
+}
+
+
+### ADD BOOK WITH EMPTY AUTHOR
+
+POST {{Homework_HostAddress}}/api/books
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "DesignPatterns",
+  "author": "",
+  "year": 1998
+}
+
+
+### ADD BOOK WITN EMPTY AUTHOR
+
+POST {{Homework_HostAddress}}/api/books
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "DesignPatterns",
+  "author": "GOF"
+}
+
+
+### DELETE BOOK BY ID
+
+DELETE {{Homework_HostAddress}}/api/books/4
+Accept: application/json
+
+
+### EDIT BOOK 
+
+PUT {{Homework_HostAddress}}/api/books/5
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "ASPNET",
+  "author": "AndrewLock",
+  "year": 2022
+}

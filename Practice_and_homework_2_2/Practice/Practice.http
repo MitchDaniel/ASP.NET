@@ -1,0 +1,55 @@
+@host = http://localhost:5095
+ 
+### GET ALL PRODUCTS (EXPECTED 200 OK)
+
+GET {{host}}/api/Products
+Accept: application/json
+
+### GET PRODUCT BY EXISTING ID (EXPECTED 200 OK)
+
+GET {{host}}/api/Products/1
+Accept: application/json
+
+### GET PRODUCT BY NON-EXISTING ID (EXPECTED 404 NOT FOUND)
+
+GET {{host}}/api/Products/10
+Accept: application/json
+
+### CREATE NEW PRODUCT (EXPECTED 201 CREATED)
+
+POST {{host}}/api/Products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Cyberpunk 2077",
+  "price": 19.99
+}
+
+### UPDATE EXISTING PRODUCT (EXPECTED 200 OK)
+
+PUT {{host}}/api/Products/4
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Cyberpunk 2077 - Fantom liberty",
+  "price": 17.99
+}
+
+### UPDATE NON-EXISTING PRODUCT (EXPECTED 404 NOT FOUND)
+
+PUT {{host}}/api/Products/10
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Cyberpunk 2077 - Fantom liberty",
+  "price": 17.99
+}
+
+### DELETE EXISTING PRODUCT (EXPECTED 204 NO CONTENT)
+
+DELETE {{host}}/api/Products/4
+Accept: application/json
+
