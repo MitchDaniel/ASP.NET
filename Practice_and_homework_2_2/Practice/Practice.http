@@ -44,7 +44,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Cyberpunk 2077 - Fantom liberty",
+  "name": "Cyberpunk 2077 - Phantom Liberty",
   "price": 17.99
 }
 
